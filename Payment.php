@@ -24,10 +24,10 @@ class Payment extends Component
         return $this->_getPayment('_weixin',$notify_url);
     }
 
-    public function getBalance($notify_url = null)
+    public function getBalance()
     {
         $this->balance_config = array_merge(['class'=>Balance::className()],$this->balance_config);
-        return $this->_getPayment('_balance',$notify_url);
+        return $this->_getPayment('_balance',null);
     }
 
     private function _getPayment($name, $notify_url)
