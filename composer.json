@@ -7,7 +7,9 @@
   "keywords": ["yii2", "payment", "alipay", "weixin", "app pay"],
   "license": "BSD-3-Clause",
   "support": {
-    "source": "https://github.com/bbcsky/yii2-payment"
+    "source": "https://github.com/bbcsky/yii2-payment",
+    "wiki": "https://github.com/bbcsky/yii2-payment/wiki",
+    "issues": "https://github.com/bbcsky/yii2-payment/issues"
   },
   "authors": [
     {

@@ -1,7 +1,7 @@
-Payments Alipay and Weixin for Yii 2
+Payments Alipay, Weixin and Balance for Yii 2
 ===============================================
 
-The yii2 payment extension for alipay and weixin
+The yii2 payment extension for alipay, weixin and balance
 
 For license information check the [LICENSE](LICENSE.md)-file.
 
