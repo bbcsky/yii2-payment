@@ -41,7 +41,7 @@ return [
     //....
     'components' => [
         'payment' => [
-            'xx' => 'xx',
+            'class' => 'bbcsky\payment\Payment',
             'xx' => 'xx',
             'xx' => 'xx',
         ],

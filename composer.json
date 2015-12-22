@@ -1,8 +1,6 @@
 {
-  // package name
   "name": "bbcsky/yii2-payment",
 
-  // package type
   "type": "yii2-extension",
 
   "description": "The yii2 payment extension for alipay and weixin",
@@ -18,12 +16,10 @@
     }
   ],
 
-  // package dependencies
   "require": {
     "yiisoft/yii2": "*"
   },
 
-  // class autoloading specs
   "autoload": {
     "psr-4": {
       "bbcsky\\payment\\": ""
