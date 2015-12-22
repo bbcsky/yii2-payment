@@ -2,6 +2,7 @@
 namespace bbcsky\payment;
 
 use yii\base\Component;
+
 abstract class Payment extends Component
 {
     public $notifyUrl = '';
