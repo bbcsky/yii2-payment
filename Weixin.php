@@ -2,8 +2,9 @@
 namespace bbcsky\payment;
 
 use Yii;
+use yii\base\Component;
 
-class Weixin extends Payment
+class Weixin extends Component
 {
     public $orderUrl = 'https://api.mch.weixin.qq.com/pay/unifiedorder';
     public $searchOrderUrl = 'https://api.mch.weixin.qq.com/pay/orderquery';

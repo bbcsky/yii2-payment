@@ -2,8 +2,9 @@
 namespace bbcsky\payment;
 
 use Yii;
+use yii\base\Component;
 
-class Balance extends Payment
+class Balance extends Component
 {
     /**
      * 支付接口

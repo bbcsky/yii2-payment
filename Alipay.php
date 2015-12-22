@@ -2,8 +2,10 @@
 namespace bbcsky\payment;
 
 use Yii;
+use yii\base\Component;
+use yii\base\InvalidConfigException;
 
-class Alipay extends Payment
+class Alipay extends Component
 {
     public $sign_type = 'RSA';
     public $input_charset = 'utf-8';
@@ -23,6 +25,14 @@ class Alipay extends Payment
     private $curl_proxy_host;
     private $curl_proxy_port;
 
+    public function init()
+    {
+        parent::init();
+        if(empty($this->partner))
+        {
+            throw new InvalidConfigException(get_class($this) . ' must define a partner.');
+        }
+    }
     /**
      * 支付接口
      * @param $order

@@ -3,57 +3,44 @@ namespace bbcsky\payment;
 
 use yii\base\Component;
 
-abstract class Payment extends Component
+class Payment extends Component
 {
-    public $notifyUrl = '';
-    /**
-     * 支付接口
-     * @param $order
-     * @return mixed
-     */
-    abstract public function pay($order);
+    public $weixin_config = [];
+    public $alipay_config = [];
+    public $balance_config = [];
+    private $_weixin = null;
+    private $_alipay = null;
+    private $_balance = null;
 
-    /**
-     * 预支付接口，在APP上发起支付
-     * @param $order
-     * @return mixed
-     */
-    abstract public function prepay($order);
+    public function getAlipay($notify_url = null)
+    {
+        $this->alipay_config = array_merge(['class'=>Alipay::className()],$this->alipay_config);
+        return $this->_getPayment('_alipay',$notify_url);
+    }
 
-    /**
-     * 退款接口
-     * @param $order
-     * @return mixed
-     */
-    abstract public function refund($order);
+    public function getWeixin($notify_url = null)
+    {
+        $this->weixin_config = array_merge(['class'=>Weixin::className()],$this->weixin_config);
+        return $this->_getPayment('_weixin',$notify_url);
+    }
 
-    /**
-     * Notify处理完成接口
-     * @return mixed
-     */
-    abstract public function finish();
+    public function getBalance($notify_url = null)
+    {
+        $this->balance_config = array_merge(['class'=>Balance::className()],$this->balance_config);
+        return $this->_getPayment('_balance',$notify_url);
+    }
 
-    /**
-     * 设置Notify回调接口
-     * @return mixed
-     */
-    abstract public function setNotifyUrl();
-
-    /**
-     * 获得Notify返回的支付金额
-     * @return mixed
-     */
-    abstract public function getTotalFee();
-
-    /**
-     * 获得Notify返回的交易号
-     * @return mixed
-     */
-    abstract public function getSerialNo();
-
-    /**
-     * 获得Notify返回的原始数据
-     * @return mixed
-     */
-    abstract public function getNotifyRaw();
+    private function _getPayment($name, $notify_url)
+    {
+        $config = substr($name.'_config',1);
+        if(is_null($this->{$name}))
+        {
+            $this->{$name} = \Yii::createObject($this->{$config});
+        }
+        if(!is_null($notify_url))
+        {
+            $this->{$name}->setNotifyUrl($notify_url);
+        }
+        return $this->{$name};
+    }
 }
