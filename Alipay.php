@@ -210,11 +210,11 @@ class Alipay extends Payment
     {
         if($total_fee)
         {
-            return $total_fee;
+            return round($total_fee,2,PHP_ROUND_HALF_DOWN);
         }
         if(isset($this->notify_data['total_fee']))
         {
-            return $this->notify_data['total_fee'];
+            return round($this->notify_data['total_fee'],2,PHP_ROUND_HALF_DOWN);
         }
         return false;
     }

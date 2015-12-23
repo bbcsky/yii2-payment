@@ -451,7 +451,7 @@ class Weixin extends Payment
         $order = array_intersect_key($order,array_fill_keys($keys,''));
         $order['appid'] = $this->appid;
         $order['mch_id'] = $this->mch_id;
-        $order['notify_url'] = $this->notifyUrl;
+        $order['notify_url'] = $this->notify_url;
         $order['spbill_create_ip'] = $this->getIp();
         $order['nonce_str'] = $this->randomStr();
         $order['sign'] = $this->sign($order);

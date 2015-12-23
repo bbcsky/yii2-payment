@@ -30,6 +30,40 @@ class Instance extends Component{
     {
         $this->balance_config = $config;
     }
+
+    /**
+     * 组合使用余额支付和其他支付
+     * @param $order
+     * @param $payment
+     * @param $balance
+     */
+    public function unionPay($order,$payment,$balance,$notify)
+    {
+        $res = [];
+        $total_fee = $order['total_fee'];
+        if($balance > 0)
+        {
+            $pay = $this->getBalance();
+            if($balance >= $total_fee)
+            {
+                $res['balance'] = $pay->pay($order);
+                return $res;
+            }
+            else
+            {
+                $order['total_fee'] = $balance;
+                $res['balance'] = $pay->pay($order);
+                $total_fee -= $balance;
+            }
+        }
+        $order['total_fee'] = $total_fee;
+        $pay = $this->$payment;
+        $pay->setNotifyUrl($notify);
+        $res[$payment] = $pay->prepay($order);
+        //$res[$payment]['balance'] = $balance;
+        return $res;
+    }
+
     /**
      * 获得支付宝支付
      * @param null $notify_url
