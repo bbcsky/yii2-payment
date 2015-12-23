@@ -2,11 +2,10 @@
 namespace bbcsky\payment;
 
 use Yii;
-use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidValueException;
 
-class Weixin extends Component
+class Weixin extends Payment
 {
     public $order_url = 'https://api.mch.weixin.qq.com/pay/unifiedorder';
     public $search_order_url = 'https://api.mch.weixin.qq.com/pay/orderquery';
@@ -14,7 +13,6 @@ class Weixin extends Component
     public $refund_url = 'https://api.mch.weixin.qq.com/secapi/pay/refund';
     public $search_refund_url = 'https://api.mch.weixin.qq.com/pay/refundquery';
     public $order_pre = 'Weixin';
-    public $notify_url = '';
 
     private $appid;
     private $mch_id;

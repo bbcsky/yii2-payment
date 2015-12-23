@@ -2,13 +2,11 @@
 namespace bbcsky\payment;
 
 use Yii;
-use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidValueException;
 
-class Alipay extends Component
+class Alipay extends Payment
 {
-    public $notify_url = '';
     //public $sign_type = 'RSA';
     public $input_charset = 'utf-8';
     //public $transport = 'http';

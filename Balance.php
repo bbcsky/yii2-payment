@@ -2,13 +2,11 @@
 namespace bbcsky\payment;
 
 use Yii;
-use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidValueException;
 
-class Balance extends Component
+class Balance extends Payment
 {
-    public $notify_url = '';
     /**
      * @var callable return balance as numbers
      */
@@ -24,7 +22,7 @@ class Balance extends Component
 
     public $order_pre = 'Balanc';
 
-    private function getBalance($uid,$order)
+    private function _getBalance($uid,$order)
     {
         if(is_callable($this->balance_callable))
         {
@@ -81,7 +79,7 @@ class Balance extends Component
         }
         $order['total_fee'] = round($order['total_fee'],2);
         $paras = ['success'=>0,'total_fee'=>$order['total_fee']];
-        $balance = $this->getBalance($order['uid'],$order);
+        $balance = $this->_getBalance($order['uid'],$order);
         $paras['balance'] = $balance;
         if($balance >= $paras['total_fee'])
         {
