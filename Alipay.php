@@ -168,10 +168,6 @@ class Alipay extends Component
         }
         if($sign)
         {
-            if(empty($paras['trade_status']))
-            {
-                $paras['total_fee'] = 0;
-            }
             $paras['trade_status'] = isset($paras['trade_status'])? trim($paras['trade_status']) : '';
             if(!in_array($paras['trade_status'],['TRADE_SUCCESS','TRADE_FINISHED']))
             {
@@ -212,24 +208,34 @@ class Alipay extends Component
      * 获得Notify返回的支付金额
      * @return mixed
      */
-    public function getTotalFee()
+    public function getTotalFee($total_fee = null)
     {
+        if($total_fee)
+        {
+            return $total_fee;
+        }
         if(isset($this->notify_data['total_fee']))
         {
             return $this->notify_data['total_fee'];
         }
+        return false;
     }
 
     /**
      * 获得Notify返回的交易号
      * @return mixed
      */
-    public function getSerialNo()
+    public function getSerialNo($arr = null)
     {
+        if(isset($arr['trade_no']))
+        {
+            return $arr['trade_no'];
+        }
         if(isset($this->notify_data['trade_no']))
         {
             return $this->notify_data['trade_no'];
         }
+        return false;
     }
 
     /**
